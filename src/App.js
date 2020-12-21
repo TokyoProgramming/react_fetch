@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import Post from './components/Post';
+import User from './components/User';
 
 function App() {
-  const [data, setData] = useState([]);
+  const [users, setUsers] = useState([]);
   const [posts, setPost] = useState([]);
 
   const fetchData = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/todos/');
     const data = await res.json();
     console.log(data);
-    setData(data);
+    setUsers(data);
   };
 
   const asyncFetchData = async () => {
@@ -29,18 +31,13 @@ function App() {
     <div className="App">
       <div className="container">
         <h1>hello react</h1>
-        <button> Get post</button>
-        {/* <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-        <ul>
-          {data.map((user) => (
-            <li key={user.id}>{user.id}</li>
-          ))}
-        </ul>
-        <button></button> */}
+
+        {posts.map((post) => (
+          <Post key={post.id} id={post.id} post={post.title} />
+        ))}
+        {users.map((user) => (
+          <User key={user.id} />
+        ))}
       </div>
     </div>
   );
